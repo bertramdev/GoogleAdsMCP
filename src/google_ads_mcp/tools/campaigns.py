@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import Context
 
+from google.protobuf import field_mask_pb2
+
 from google_ads_mcp.helpers import (
     currency_to_micros,
     error_response,
@@ -291,8 +293,6 @@ def update_campaign(
 
         if not update_mask:
             return error_response("No fields to update. Provide at least one field.")
-
-        from google.protobuf import field_mask_pb2
 
         campaign_op.update_mask.CopyFrom(
             field_mask_pb2.FieldMask(paths=update_mask)

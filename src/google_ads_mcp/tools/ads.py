@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import Context
 
+from google.protobuf import field_mask_pb2
+
 from google_ads_mcp.helpers import (
     error_response,
     execute_query,
@@ -445,8 +447,6 @@ def set_ad_status(
         )
         status_enum = client.get_type("AdGroupAdStatusEnum").AdGroupAdStatus
         ad_group_ad.status = getattr(status_enum, status)
-
-        from google.protobuf import field_mask_pb2
 
         op.update_mask.CopyFrom(
             field_mask_pb2.FieldMask(paths=["status"])

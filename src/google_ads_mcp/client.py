@@ -11,7 +11,7 @@ from .config import GoogleAdsSettings
 logger = logging.getLogger(__name__)
 
 # Google Ads API version
-API_VERSION = "v19"
+API_VERSION = "v23"
 
 
 class GoogleAdsClientWrapper:

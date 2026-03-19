@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from google_ads_mcp.helpers import (
+    build_date_clause,
     currency_to_micros,
     error_response,
     micros_to_currency,
@@ -54,3 +55,15 @@ def test_error_response_with_details():
     result = error_response("Failed", details={"code": 123})
     assert result["success"] is False
     assert result["details"] == {"code": 123}
+
+
+def test_build_date_clause_predefined():
+    assert build_date_clause("LAST_30_DAYS") == "segments.date DURING LAST_30_DAYS"
+
+
+def test_build_date_clause_custom():
+    assert build_date_clause("2024-01-01,2024-01-31") == "segments.date BETWEEN '2024-01-01' AND '2024-01-31'"
+
+
+def test_build_date_clause_custom_with_spaces():
+    assert build_date_clause("2024-01-01, 2024-01-31") == "segments.date BETWEEN '2024-01-01' AND '2024-01-31'"

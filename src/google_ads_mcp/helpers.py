@@ -81,6 +81,18 @@ def execute_query_stream(
     return results
 
 
+def build_date_clause(date_range: str) -> str:
+    """Build a GAQL WHERE clause for a date range.
+
+    Accepts predefined ranges (LAST_7_DAYS, LAST_30_DAYS, etc.)
+    or custom 'YYYY-MM-DD,YYYY-MM-DD' format.
+    """
+    if "," in date_range:
+        start, end = date_range.split(",", 1)
+        return f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'"
+    return f"segments.date DURING {date_range}"
+
+
 def format_resource_name(resource_type: str, customer_id: str, resource_id: str) -> str:
     """Format a Google Ads resource name.
 

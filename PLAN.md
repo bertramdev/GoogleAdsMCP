@@ -14,7 +14,7 @@ User already has Google Ads API credentials configured.
 
 - **Python 3.14** with `uv` for dependency management
 - **`mcp[cli]>=1.26.0`** — official MCP Python SDK with FastMCP
-- **`google-ads>=29.2.0`** — Google Ads Python client (API v19)
+- **`google-ads>=29.2.0`** — Google Ads Python client (API v23)
 - **`pydantic>=2.0` + `pydantic-settings>=2.0`** — config and response models
 - **`python-dotenv>=1.0.0`** — `.env` file loading
 - **`hatchling`** — build backend
