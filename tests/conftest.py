@@ -16,9 +16,8 @@ def mock_settings():
     with patch.object(GoogleAdsSettings, "__init__", lambda self, **kwargs: None):
         settings = GoogleAdsSettings.__new__(GoogleAdsSettings)
         settings.developer_token = "test_token"
-        settings.client_id = "test_client_id"
-        settings.client_secret = "test_client_secret"
-        settings.refresh_token = "test_refresh_token"
+        settings.service_account_path = "/path/to/test-sa.json"
+        settings.impersonated_email = "test@example.com"
         settings.login_customer_id = "1234567890"
         settings.customer_id = "9876543210"
         return settings

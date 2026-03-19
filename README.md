@@ -20,7 +20,7 @@ A comprehensive Google Ads MCP server providing ~47 tools for full read/write ac
 
 - Python 3.14+
 - [uv](https://docs.astral.sh/uv/) for dependency management
-- Google Ads API credentials (developer token, OAuth2 client ID/secret, refresh token)
+- Google Ads API credentials (developer token, GCP service account JSON key)
 
 ### Installation
 
@@ -40,11 +40,12 @@ cp .env.example .env
 
 Required environment variables:
 - `GOOGLE_ADS_DEVELOPER_TOKEN` — your API developer token
-- `GOOGLE_ADS_CLIENT_ID` — OAuth2 client ID
-- `GOOGLE_ADS_CLIENT_SECRET` — OAuth2 client secret
-- `GOOGLE_ADS_REFRESH_TOKEN` — OAuth2 refresh token
+- `GOOGLE_ADS_SERVICE_ACCOUNT_PATH` — path to GCP service account JSON key file
 - `GOOGLE_ADS_LOGIN_CUSTOMER_ID` — MCC customer ID (if using MCC)
-- `GOOGLE_ADS_CUSTOMER_ID` — default customer ID (optional)
+
+Optional:
+- `GOOGLE_ADS_IMPERSONATED_EMAIL` — Workspace user email for domain-wide delegation
+- `GOOGLE_ADS_CUSTOMER_ID` — default customer ID for operations
 
 ### Running
 
@@ -64,10 +65,9 @@ Add to `claude_desktop_config.json`:
       "args": ["run", "--directory", "/path/to/GoogleAdsMCP", "google-ads-mcp"],
       "env": {
         "GOOGLE_ADS_DEVELOPER_TOKEN": "...",
-        "GOOGLE_ADS_CLIENT_ID": "...",
-        "GOOGLE_ADS_CLIENT_SECRET": "...",
-        "GOOGLE_ADS_REFRESH_TOKEN": "...",
-        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "..."
+        "GOOGLE_ADS_SERVICE_ACCOUNT_PATH": "/path/to/service-account.json",
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "...",
+        "GOOGLE_ADS_IMPERSONATED_EMAIL": "user@yourdomain.com"
       }
     }
   }
@@ -86,10 +86,9 @@ Add to `.claude/settings.local.json`:
       "args": ["run", "--directory", "/path/to/GoogleAdsMCP", "google-ads-mcp"],
       "env": {
         "GOOGLE_ADS_DEVELOPER_TOKEN": "...",
-        "GOOGLE_ADS_CLIENT_ID": "...",
-        "GOOGLE_ADS_CLIENT_SECRET": "...",
-        "GOOGLE_ADS_REFRESH_TOKEN": "...",
-        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "..."
+        "GOOGLE_ADS_SERVICE_ACCOUNT_PATH": "/path/to/service-account.json",
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "...",
+        "GOOGLE_ADS_IMPERSONATED_EMAIL": "user@yourdomain.com"
       }
     }
   }

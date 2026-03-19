@@ -17,9 +17,11 @@ class GoogleAdsSettings(BaseSettings):
     )
 
     developer_token: str = Field(description="Google Ads API developer token")
-    client_id: str = Field(description="OAuth2 client ID")
-    client_secret: str = Field(description="OAuth2 client secret")
-    refresh_token: str = Field(description="OAuth2 refresh token")
+    service_account_path: str = Field(description="Path to service account JSON key file")
+    impersonated_email: str = Field(
+        default="",
+        description="Email of the Workspace user to impersonate (domain-wide delegation)",
+    )
     login_customer_id: str = Field(
         default="",
         description="MCC customer ID (required for MCC-level access)",
@@ -33,11 +35,11 @@ class GoogleAdsSettings(BaseSettings):
         """Convert settings to a dict suitable for GoogleAdsClient.load_from_dict()."""
         config = {
             "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            "json_key_file_path": self.service_account_path,
             "use_proto_plus": True,
         }
+        if self.impersonated_email:
+            config["impersonated_email"] = self.impersonated_email
         if self.login_customer_id:
             config["login_customer_id"] = self.login_customer_id.replace("-", "")
         return config
