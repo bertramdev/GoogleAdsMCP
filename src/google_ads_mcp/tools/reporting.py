@@ -5,6 +5,7 @@ from __future__ import annotations
 from mcp.server.fastmcp import Context
 
 from google_ads_mcp.helpers import (
+    build_date_clause,
     error_response,
     execute_query,
     extract_google_ads_error,
@@ -68,11 +69,7 @@ def get_campaign_performance(
         if status_filter:
             where_clauses.append(f"campaign.status = '{status_filter}'")
 
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""
@@ -127,11 +124,7 @@ def get_ad_group_performance(
         if campaign_id:
             where_clauses.append(f"campaign.id = {campaign_id}")
 
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""
@@ -190,11 +183,7 @@ def get_search_terms_report(
         if ad_group_id:
             where_clauses.append(f"ad_group.id = {ad_group_id}")
 
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""
@@ -255,11 +244,7 @@ def get_keyword_performance_report(
         if ad_group_id:
             where_clauses.append(f"ad_group.id = {ad_group_id}")
 
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""
@@ -309,11 +294,7 @@ def get_account_performance_summary(
         client = get_client(ctx)
         cid = client.resolve_customer_id(customer_id)
         where_clauses = []
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""

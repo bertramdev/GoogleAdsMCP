@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import Context
 
+from google.protobuf import field_mask_pb2
+
 from google_ads_mcp.helpers import (
+    build_date_clause,
     currency_to_micros,
     error_response,
     execute_query,
@@ -137,8 +140,6 @@ def update_budget(
         if not update_mask:
             return error_response("No fields to update. Provide at least one field.")
 
-        from google.protobuf import field_mask_pb2
-
         budget_op.update_mask.CopyFrom(
             field_mask_pb2.FieldMask(paths=update_mask)
         )
@@ -177,11 +178,7 @@ def get_budget_utilization(
         if campaign_id:
             where_clauses.append(f"campaign.id = {campaign_id}")
 
-        if "," in date_range:
-            start, end = date_range.split(",", 1)
-            where_clauses.append(f"segments.date BETWEEN '{start.strip()}' AND '{end.strip()}'")
-        else:
-            where_clauses.append(f"segments.date DURING {date_range}")
+        where_clauses.append(build_date_clause(date_range))
 
         where = " AND ".join(where_clauses)
         query = f"""

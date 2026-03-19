@@ -6,7 +6,7 @@ A comprehensive Google Ads MCP server providing ~47 tools across 9 categories fo
 ## Tech Stack
 - Python 3.14, uv for dependency management
 - `mcp[cli]` (FastMCP) for MCP server
-- `google-ads` Python client library (API v19)
+- `google-ads` Python client library (API v23)
 - Pydantic v2 for config and models
 - pytest for testing
 
