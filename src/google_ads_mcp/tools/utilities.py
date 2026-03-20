@@ -85,17 +85,17 @@ def get_field_metadata(
         cid = client.resolve_customer_id(customer_id)
         query = f"""
             SELECT
-                google_ads_field.name,
-                google_ads_field.category,
-                google_ads_field.data_type,
-                google_ads_field.selectable,
-                google_ads_field.filterable,
-                google_ads_field.sortable,
-                google_ads_field.selectable_with,
-                google_ads_field.is_repeated
+                name,
+                category,
+                data_type,
+                selectable,
+                filterable,
+                sortable,
+                selectable_with,
+                is_repeated
             FROM google_ads_field
-            WHERE google_ads_field.name LIKE '{resource_type}.%'
-            ORDER BY google_ads_field.name
+            WHERE name LIKE '{resource_type}.%'
+            ORDER BY name
         """
         gaf_service = client.get_service("GoogleAdsFieldService")
         response = gaf_service.search_google_ads_fields(query=query)

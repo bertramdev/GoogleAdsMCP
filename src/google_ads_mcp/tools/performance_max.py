@@ -309,7 +309,6 @@ def get_asset_group_details(
                 asset_group_asset.asset,
                 asset_group_asset.field_type,
                 asset_group_asset.status,
-                asset_group_asset.performance_label,
                 asset.id,
                 asset.name,
                 asset.type,
@@ -539,7 +538,6 @@ def get_asset_performance(
                 asset_group.id,
                 asset_group.name,
                 asset_group_asset.field_type,
-                asset_group_asset.performance_label,
                 asset_group_asset.status,
                 asset.id,
                 asset.name,
@@ -550,7 +548,7 @@ def get_asset_performance(
                 campaign.name
             FROM asset_group_asset
             {where}
-            ORDER BY asset_group_asset.performance_label
+            ORDER BY asset_group_asset.field_type
         """
         results = execute_query(client, cid, query)
         return success_response(
@@ -591,10 +589,7 @@ def get_pmax_placement_performance(
                 performance_max_placement_view.display_name,
                 performance_max_placement_view.placement,
                 performance_max_placement_view.placement_type,
-                metrics.impressions,
-                metrics.clicks,
-                metrics.cost_micros,
-                metrics.conversions
+                metrics.impressions
             FROM performance_max_placement_view
             WHERE {where}
             ORDER BY metrics.impressions DESC
