@@ -6,6 +6,7 @@ from mcp.server.fastmcp import Context
 
 from google.protobuf import field_mask_pb2
 
+from google_ads_mcp.annotations import CREATE, DESTRUCTIVE, READ_ONLY, UPDATE
 from google_ads_mcp.helpers import (
     build_date_clause,
     currency_to_micros,
@@ -14,7 +15,6 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
-from google_ads_mcp.annotations import CREATE, DESTRUCTIVE, READ_ONLY, UPDATE
 from google_ads_mcp.server import get_client, mcp
 
 

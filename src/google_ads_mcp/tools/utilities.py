@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import Context
 
+from google_ads_mcp.annotations import READ_ONLY, READ_ONLY_LOCAL
 from google_ads_mcp.helpers import (
     currency_to_micros,
     error_response,
     micros_to_currency,
     success_response,
 )
-from google_ads_mcp.annotations import READ_ONLY, READ_ONLY_LOCAL
 from google_ads_mcp.server import get_client, mcp
 
 # Common GAQL FROM-clause resources
