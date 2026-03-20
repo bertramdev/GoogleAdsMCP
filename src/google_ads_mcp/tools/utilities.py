@@ -93,7 +93,6 @@ def get_field_metadata(
                 sortable,
                 selectable_with,
                 is_repeated
-            FROM google_ads_field
             WHERE name LIKE '{resource_type}.%'
             ORDER BY name
         """
