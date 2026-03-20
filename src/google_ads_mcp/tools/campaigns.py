@@ -44,8 +44,6 @@ def list_campaigns(
                 campaign.advertising_channel_type,
                 campaign.bidding_strategy_type,
                 campaign.campaign_budget,
-                campaign.start_date,
-                campaign.end_date,
                 campaign.serving_status,
                 campaign_budget.amount_micros
             FROM campaign
@@ -86,8 +84,6 @@ def get_campaign(
                 campaign.advertising_channel_sub_type,
                 campaign.bidding_strategy_type,
                 campaign.campaign_budget,
-                campaign.start_date,
-                campaign.end_date,
                 campaign.serving_status,
                 campaign.target_cpa.target_cpa_micros,
                 campaign.target_roas.target_roas,

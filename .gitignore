@@ -25,6 +25,9 @@ ENV/
 .env
 .env.local
 
+# MCP config (local paths)
+.mcp.json
+
 # Testing
 .pytest_cache/
 .coverage

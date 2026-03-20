@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -35,7 +37,7 @@ class GoogleAdsSettings(BaseSettings):
         """Convert settings to a dict suitable for GoogleAdsClient.load_from_dict()."""
         config = {
             "developer_token": self.developer_token,
-            "json_key_file_path": self.service_account_path,
+            "json_key_file_path": str(Path(self.service_account_path).expanduser()),
             "use_proto_plus": True,
         }
         if self.impersonated_email:
