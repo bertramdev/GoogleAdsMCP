@@ -76,7 +76,7 @@ Add to `claude_desktop_config.json`:
 
 ### Claude Code Configuration
 
-Add to `.claude/settings.local.json`:
+Add to `.mcp.json` in the project root:
 
 ```json
 {
@@ -91,6 +91,26 @@ Add to `.claude/settings.local.json`:
         "GOOGLE_ADS_IMPERSONATED_EMAIL": "user@yourdomain.com"
       }
     }
+  }
+}
+```
+
+### Permissions
+
+Read-only tools (`get_*`, `list_*`, `execute_gaql`, `convert_micros`) are auto-allowed for all users via `.claude/settings.json`. Write tools (`create_*`, `update_*`, `remove_*`, `set_*`, `add_*`) require approval on each use.
+
+If you need write tools auto-allowed, add them to your personal `.claude/settings.local.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "mcp__google-ads__create_*",
+      "mcp__google-ads__update_*",
+      "mcp__google-ads__remove_*",
+      "mcp__google-ads__set_*",
+      "mcp__google-ads__add_*"
+    ]
   }
 }
 ```

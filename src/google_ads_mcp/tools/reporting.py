@@ -11,10 +11,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import READ_ONLY
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def execute_gaql(
     customer_id: str,
     query: str,
@@ -41,7 +42,7 @@ def execute_gaql(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_campaign_performance(
     customer_id: str,
     ctx: Context,
@@ -101,7 +102,7 @@ def get_campaign_performance(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_ad_group_performance(
     customer_id: str,
     ctx: Context,
@@ -156,7 +157,7 @@ def get_ad_group_performance(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_search_terms_report(
     customer_id: str,
     ctx: Context,
@@ -214,7 +215,7 @@ def get_search_terms_report(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_keyword_performance_report(
     customer_id: str,
     ctx: Context,
@@ -278,7 +279,7 @@ def get_keyword_performance_report(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_account_performance_summary(
     customer_id: str,
     ctx: Context,

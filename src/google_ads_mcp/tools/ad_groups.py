@@ -13,10 +13,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import CREATE, DESTRUCTIVE, READ_ONLY, UPDATE
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def list_ad_groups(
     customer_id: str,
     campaign_id: str,
@@ -64,7 +65,7 @@ def list_ad_groups(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_ad_group(
     customer_id: str,
     ad_group_id: str,
@@ -104,7 +105,7 @@ def get_ad_group(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_ad_group(
     customer_id: str,
     campaign_id: str,
@@ -161,7 +162,7 @@ def create_ad_group(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=UPDATE)
 def update_ad_group(
     customer_id: str,
     ad_group_id: str,
@@ -225,7 +226,7 @@ def update_ad_group(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def set_ad_group_status(
     customer_id: str,
     ad_group_id: str,

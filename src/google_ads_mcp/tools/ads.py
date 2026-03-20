@@ -12,10 +12,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import CREATE, DESTRUCTIVE, READ_ONLY
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def list_ads(
     customer_id: str,
     ad_group_id: str,
@@ -64,7 +65,7 @@ def list_ads(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_responsive_search_ad(
     customer_id: str,
     ad_group_id: str,
@@ -144,7 +145,7 @@ def create_responsive_search_ad(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_responsive_display_ad(
     customer_id: str,
     ad_group_id: str,
@@ -245,7 +246,7 @@ def create_responsive_display_ad(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_video_ad(
     customer_id: str,
     ad_group_id: str,
@@ -324,7 +325,7 @@ def create_video_ad(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_demand_gen_ad(
     customer_id: str,
     ad_group_id: str,
@@ -415,7 +416,7 @@ def create_demand_gen_ad(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def set_ad_status(
     customer_id: str,
     ad_group_id: str,
@@ -463,7 +464,7 @@ def set_ad_status(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_ad_details(
     customer_id: str,
     ad_group_id: str,

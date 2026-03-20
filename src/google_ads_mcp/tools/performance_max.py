@@ -12,10 +12,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import CREATE, DESTRUCTIVE, READ_ONLY
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_performance_max_campaign(
     customer_id: str,
     campaign_name: str,
@@ -236,7 +237,7 @@ def create_performance_max_campaign(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def list_asset_groups(
     customer_id: str,
     campaign_id: str,
@@ -273,7 +274,7 @@ def list_asset_groups(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_asset_group_details(
     customer_id: str,
     asset_group_id: str,
@@ -342,7 +343,7 @@ def get_asset_group_details(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def add_assets_to_group(
     customer_id: str,
     asset_group_id: str,
@@ -400,7 +401,7 @@ def add_assets_to_group(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def remove_asset_from_group(
     customer_id: str,
     asset_group_id: str,
@@ -446,7 +447,7 @@ def remove_asset_from_group(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def add_audience_signal(
     customer_id: str,
     asset_group_id: str,
@@ -507,7 +508,7 @@ def add_audience_signal(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_asset_performance(
     customer_id: str,
     ctx: Context,
@@ -559,7 +560,7 @@ def get_asset_performance(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_pmax_placement_performance(
     customer_id: str,
     campaign_id: str,

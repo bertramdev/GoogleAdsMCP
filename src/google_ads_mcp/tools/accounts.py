@@ -10,10 +10,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import READ_ONLY
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def list_accessible_accounts(ctx: Context) -> dict:
     """List all Google Ads accounts accessible via current credentials.
 
@@ -32,7 +33,7 @@ def list_accessible_accounts(ctx: Context) -> dict:
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_account_info(customer_id: str, ctx: Context) -> dict:
     """Get details for a Google Ads account (name, currency, timezone, etc.).
 
@@ -63,7 +64,7 @@ def get_account_info(customer_id: str, ctx: Context) -> dict:
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_account_hierarchy(ctx: Context, customer_id: str | None = None) -> dict:
     """Get the MCC account hierarchy tree.
 

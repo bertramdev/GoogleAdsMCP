@@ -14,10 +14,11 @@ from google_ads_mcp.helpers import (
     extract_google_ads_error,
     success_response,
 )
+from google_ads_mcp.annotations import CREATE, READ_ONLY, UPDATE
 from google_ads_mcp.server import get_client, mcp
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def list_budgets(
     customer_id: str,
     ctx: Context,
@@ -55,7 +56,7 @@ def list_budgets(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=CREATE)
 def create_budget(
     customer_id: str,
     name: str,
@@ -98,7 +99,7 @@ def create_budget(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=UPDATE)
 def update_budget(
     customer_id: str,
     budget_id: str,
@@ -155,7 +156,7 @@ def update_budget(
         return error_response(extract_google_ads_error(e))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_budget_utilization(
     customer_id: str,
     ctx: Context,
