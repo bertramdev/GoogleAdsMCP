@@ -97,23 +97,50 @@ Add to `.mcp.json` in the project root:
 
 ### Permissions
 
-Read-only tools (`get_*`, `list_*`, `execute_gaql`, `convert_micros`) are auto-allowed for all users via `.claude/settings.json`. Write tools (`create_*`, `update_*`, `remove_*`, `set_*`, `add_*`) require approval on each use.
+All tools include [MCP tool annotations](https://modelcontextprotocol.io/docs/concepts/tool-annotations) (`readOnlyHint`, `destructiveHint`, etc.) so clients can make informed permission decisions. However, Claude Code requires explicit allow rules — annotations alone don't auto-approve tools.
 
-If you need write tools auto-allowed, add them to your personal `.claude/settings.local.json`:
+**Within this project:** The project-level `.claude/settings.json` auto-allows read-only tools (`get_*`, `list_*`, `execute_gaql`, `convert_micros`). Write tools require approval on each use.
+
+**From other projects:** Project-level permissions don't apply. To allow all tools globally, add to `~/.claude/settings.json`:
 
 ```json
 {
   "permissions": {
     "allow": [
-      "mcp__google-ads__create_*",
-      "mcp__google-ads__update_*",
-      "mcp__google-ads__remove_*",
-      "mcp__google-ads__set_*",
-      "mcp__google-ads__add_*"
+      "mcp__google-ads__*"
     ]
   }
 }
 ```
+
+Or for read-only tools only:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "mcp__google-ads__get_*",
+      "mcp__google-ads__list_*",
+      "mcp__google-ads__execute_gaql",
+      "mcp__google-ads__convert_micros"
+    ]
+  }
+}
+```
+
+### Security Considerations
+
+This MCP server **cannot** modify account access, user permissions, login credentials, billing, or payment methods. There are no tools for account administration — a compromised server cannot lock anyone out of their account.
+
+**Worst-case impact if credentials are compromised:**
+
+| Risk | Details |
+|------|---------|
+| **Financial** | Creating campaigns/budgets or increasing keyword bids could spend money |
+| **Disruption** | Pausing/removing campaigns, keywords, or ad groups |
+| **Data exposure** | Reading account performance, search terms, and campaign details. `execute_gaql` can also read sensitive resources like `customer_user_access` and `billing_setup` (read-only — no mutations possible via GAQL) |
+
+All destructive tools (`remove_*`, `set_*_status`) require a `confirm=True` parameter as a server-side safety guard.
 
 ## Testing
 
