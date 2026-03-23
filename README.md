@@ -18,14 +18,14 @@ A comprehensive Google Ads MCP server providing ~47 tools for full read/write ac
 
 ### Prerequisites
 
-- Python 3.14+
+- Python 3.12+
 - [uv](https://docs.astral.sh/uv/) for dependency management
 - Google Ads API credentials (developer token, GCP service account JSON key)
 
 ### Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/bertramdev/GoogleAdsMCP.git
 cd GoogleAdsMCP
 uv sync
 ```
@@ -148,6 +148,73 @@ Removal tools (`remove_campaign`, `remove_keyword`, `remove_asset_from_group`) r
 uv run pytest
 ```
 
-## Tool Reference
+## Tool Reference (47 tools)
 
-See [PLAN.md](PLAN.md) for the full tool inventory with descriptions.
+### Accounts (3)
+- `list_accessible_accounts` — List accounts accessible via credentials
+- `get_account_info` — Account details (name, currency, timezone)
+- `get_account_hierarchy` — MCC hierarchy tree
+
+### Campaigns (6)
+- `list_campaigns` — List campaigns with optional status filter
+- `get_campaign` — Single campaign details
+- `create_campaign` — Create Search/Display campaign with budget
+- `update_campaign` — Update name, bidding strategy, etc.
+- `set_campaign_status` — Enable/pause/remove
+- `remove_campaign` — Soft delete with confirm
+
+### Ad Groups (5)
+- `list_ad_groups` — List ad groups in campaign
+- `get_ad_group` — Ad group details
+- `create_ad_group` — Create ad group with bid
+- `update_ad_group` — Update name, bid, status
+- `set_ad_group_status` — Enable/pause/remove
+
+### Ads (7)
+- `list_ads` — List ads in ad group
+- `create_responsive_search_ad` — RSA for Search campaigns
+- `create_responsive_display_ad` — Responsive display ad
+- `create_video_ad` — Video ad for YouTube
+- `create_demand_gen_ad` — Demand Gen ad
+- `set_ad_status` — Enable/pause/remove
+- `get_ad_details` — Full ad details
+
+### Keywords (5)
+- `list_keywords` — List keywords in ad group
+- `add_keywords` — Add keywords with match types (batch)
+- `remove_keyword` — Remove keyword
+- `update_keyword_bid` — Update CPC bid
+- `get_keyword_performance` — Keyword metrics
+
+### Performance Max (8)
+- `create_performance_max_campaign` — Full PMax campaign creation
+- `list_asset_groups` — List asset groups in PMax campaign
+- `get_asset_group_details` — Asset group details with linked assets
+- `add_assets_to_group` — Add assets to asset group
+- `remove_asset_from_group` — Remove asset from asset group
+- `add_audience_signal` — Add audience/search theme signals
+- `get_asset_performance` — Asset-level performance labels
+- `get_pmax_placement_performance` — Channel breakdown
+
+### Budgets (4)
+- `list_budgets` — List campaign budgets
+- `create_budget` — Create shared budget
+- `update_budget` — Update budget amount
+- `get_budget_utilization` — Budget vs actual spend
+
+### Reporting (6)
+- `execute_gaql` — Flexible GAQL query execution
+- `get_campaign_performance` — Campaign metrics
+- `get_ad_group_performance` — Ad group metrics
+- `get_search_terms_report` — Search terms report
+- `get_keyword_performance_report` — Keyword metrics
+- `get_account_performance_summary` — Account daily summary
+
+### Utilities (3)
+- `list_gaql_resources` — Available GAQL resources
+- `get_field_metadata` — Field metadata for a resource
+- `convert_micros` — Micros to currency conversion
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE).
