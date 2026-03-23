@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__google-ads__get_*",
+      "mcp__google-ads__list_*",
+      "mcp__google-ads__execute_gaql",
+      "mcp__google-ads__convert_micros"
+    ]
+  }
+}

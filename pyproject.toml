@@ -3,8 +3,20 @@ name = "google-ads-mcp"
 version = "0.1.0"
 description = "A comprehensive Google Ads MCP server with ~47 tools for full read/write access"
 readme = "README.md"
-requires-python = ">=3.14"
-license = "MIT"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+authors = [
+    { name = "Bertram Labs" },
+]
+keywords = ["google-ads", "mcp", "model-context-protocol", "claude", "advertising"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
 dependencies = [
     "mcp[cli]>=1.26.0",
     "google-ads>=29.2.0",
@@ -12,6 +24,11 @@ dependencies = [
     "pydantic-settings>=2.0",
     "python-dotenv>=1.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/bertramdev/GoogleAdsMCP"
+Repository = "https://github.com/bertramdev/GoogleAdsMCP"
+"Bug Tracker" = "https://github.com/bertramdev/GoogleAdsMCP/issues"
 
 [project.scripts]
 google-ads-mcp = "google_ads_mcp.server:main"

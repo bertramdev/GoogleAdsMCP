@@ -25,8 +25,20 @@ ENV/
 .env
 .env.local
 
+# Credentials & secrets
+service-account*.json
+google-ads.yaml
+*.pem
+*.key
+
 # MCP config (local paths)
 .mcp.json
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Working plans
+plans/
 
 # Testing
 .pytest_cache/
