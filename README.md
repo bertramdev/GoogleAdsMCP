@@ -140,7 +140,7 @@ This MCP server **cannot** modify account access, user permissions, login creden
 | **Disruption** | Pausing/removing campaigns, keywords, or ad groups |
 | **Data exposure** | Reading account performance, search terms, and campaign details. `execute_gaql` can also read sensitive resources like `customer_user_access` and `billing_setup` (read-only — no mutations possible via GAQL) |
 
-All destructive tools (`remove_*`, `set_*_status`) require a `confirm=True` parameter as a server-side safety guard.
+Removal tools (`remove_campaign`, `remove_keyword`, `remove_asset_from_group`) require `confirm_removal=True` as a server-side safety guard. The `set_*_status` tools execute immediately without a confirmation parameter.
 
 ## Testing
 
