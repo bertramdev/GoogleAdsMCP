@@ -14,7 +14,7 @@ A comprehensive Google Ads MCP server providing ~47 tools across 9 categories fo
 - `src/google_ads_mcp/` — main package
 - `src/google_ads_mcp/tools/` — tool modules (one per category)
 - Tools return dicts, never raise exceptions (structured error responses)
-- Destructive operations require `confirm=True` parameter
+- Removal tools (`remove_*`) require `confirm_removal=True` parameter; `set_*_status` tools have no confirmation guard
 - All logging to stderr (stdio transport requirement)
 - `json_response=True` on FastMCP for LLM-friendly output
 

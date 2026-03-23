@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import Context
 
+from google_ads_mcp.annotations import READ_ONLY, READ_ONLY_LOCAL
 from google_ads_mcp.helpers import (
     currency_to_micros,
     error_response,
@@ -56,7 +57,7 @@ GAQL_RESOURCES = [
 ]
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY_LOCAL)
 def list_gaql_resources() -> dict:
     """List available GAQL FROM-clause resources for use with execute_gaql.
 
@@ -68,7 +69,7 @@ def list_gaql_resources() -> dict:
     )
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def get_field_metadata(
     resource_type: str,
     ctx: Context,
@@ -117,7 +118,7 @@ def get_field_metadata(
         return error_response(f"Failed to get field metadata: {e}")
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY_LOCAL)
 def convert_micros(
     value: float,
     direction: str = "to_micros",
